@@ -11,6 +11,14 @@ const Categoria = sequelize.define('Categoria', {
   nome: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  codigo: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  descricao: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 }, {
   tableName: 'categorias', // Nome da tabela no banco
