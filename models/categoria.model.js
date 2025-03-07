@@ -19,7 +19,7 @@ const Categoria = sequelize.define('Categoria', {
   descricao: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  }  
 }, {
   tableName: 'categorias', // Nome da tabela no banco
   timestamps: false // Define se quer usar createdAt e updatedAt
