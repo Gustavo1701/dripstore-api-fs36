@@ -77,4 +77,28 @@ const categoriaService = {
   }
 };
 
+export const inserirCategories = async () => {
+  try {
+    const categories = [
+      { nome: 'Tênis Esportivo', codigo: '1001', descricao: 'Tênis para prática de esportes e atividades físicas' },
+      { nome: 'Tênis Casual', codigo: '1002', descricao: 'Tênis para uso casual e cotidiano' },
+      { nome: 'Tênis de Corrida', codigo: '1003', descricao: 'Tênis projetado para corrida e performance' },
+      { nome: 'Tênis Skate', codigo: '1004', descricao: 'Tênis resistente e confortável para skatistas' },
+      { nome: 'Tênis Social', codigo: '1005', descricao: 'Tênis com design sofisticado para ocasiões formais' }
+    ];
+
+    for (let category of categories){
+      const existingCategory = await Categoria.findOne({ where: { codigo: category.codigo } });
+      if (!existingCategory){
+        await Categoria.create(category);
+        console.log(`Categoria '${category.nome}' inserida com sucesso.`);        
+      } else {
+        console.log(`Categoria '${category.nome}' já existe. Ignorando inserção.`);        
+      }
+    }
+  } catch (error){
+    console.error('Erro ao inserir categorias:', error);
+  }
+}
+
 export default categoriaService;

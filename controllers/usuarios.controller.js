@@ -1,11 +1,11 @@
 import express from 'express';
-import usuariosServices from '../services/usuarios.services';
+import usuariosServices from '../services/usuarios.services.js';
 
 const router = express.Router();
 
 export const usuarioController = (app) => {
 
-    router.get('/usuarios', usuariosServices.getAll)   // Buscar todos os usuarios
+    router.get('/usuarios', usuariosServices.getAll)       // Buscar todos os usuarios
         .get('/usuarios/:id', usuariosServices.getById)    // Buscar um categoria por ID
         .post('/usuarios', usuariosServices.create)        // Criar um categoria
         .put('/usuarios/:id', usuariosServices.update)     // Atualizar um categoria

@@ -1,11 +1,11 @@
-import Usuario from "../models/usuarios.model.js";
+import Usuario from "../models/usuario.model.js";
 
 const usuariosServices = {
   // Método para buscar todos os usuários
   async getAll(req, res) {
     try {
-      const usuarios = await Usuario.findAll();
-      res.status(200).json(usuarios);
+      const usuario = await Usuario.findAll();
+      res.status(200).json(usuario);
     } catch (error) {
       console.error('[ERRO]:', error);
       res.status(500).json({ mensagem: `Erro ao buscar usuários: ${error}` });

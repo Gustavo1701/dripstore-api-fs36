@@ -1,5 +1,6 @@
-import { Sequelize } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import sequelize from '../db/index.js';
+import Papel from './papel.model.js';
 
 const Usuario = sequelize.define('Usuario', {
   id: {
@@ -33,23 +34,31 @@ const Usuario = sequelize.define('Usuario', {
       isEmail: { msg: 'O e-mail deve ser válido' }
     }
   },
-  telefone: {
+  senha: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    /* validate: {
+      len: { args: [6, 10], msg: 'A senha deve ter entre 6 e 10 caracteres' },
+      is: {
+        args: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,10}$/,
+        msg: 'A senha deve conter pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial'
+      }
+    } */
+  },
+    /* telefone: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
       notEmpty: { msg: 'O telefone é obrigatório' }
     }
-  },
-  senha: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      len: { args: [6, 10], msg: 'A senha deve ter entre 6 e 10 caracteres' }
-    }
-  }
+  }, */
 }, {
-  tableName: 'usuarios', // Nome da tabela no banco
-  timestamps: false // Define se quer usar createdAt e updatedAt
+  tableName: 'usuario',
+  timestamps: true
 });
+
+//Relacionamento muitos para muitos de papel e usuario, criando a tabela usuario_papel
+Usuario.belongsToMany(Papel, { through: "usuario_papel", as: "papel" });
+Papel.belongsToMany(Usuario, { through: "usuario_papel" });
 
 export default Usuario;
